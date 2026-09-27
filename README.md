@@ -1,4 +1,4 @@
-# luish-config
+# Luis's Luish configuration (personal plugin)
 
 My personal configuration for [luish](https://github.com/luispedro/luish), packaged as a luish plugin so that every
 machine gets the same setup from one line of `config.toml`.
