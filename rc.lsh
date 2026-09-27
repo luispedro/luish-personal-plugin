@@ -1,0 +1,2 @@
+# Variables can't go in plugin.toml, so they are set here.
+CDPATH=${HOME}/Sync/work:
