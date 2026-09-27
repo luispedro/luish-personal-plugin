@@ -1,2 +1,32 @@
-# Variables can't go in plugin.toml, so they are set here.
-CDPATH=${HOME}/Sync/work:
+# What plugin.toml can't hold: variables and functions.
+
+# An empty entry first, so that the current directory is looked in first, as in zsh.
+CDPATH=:$HOME:$HOME/Sync/work:$HOME/work
+
+# Without /, so that Ctrl-W deletes one component of a path.
+WORDCHARS='*?_-.[]~=&;!#%^(){}<>'
+
+# user@host:/path/ (easy to copy with the mouse), then a bold ! if the last command failed, and § (# for root).
+PS1='%n@%m:%/ %(?. .%B!%b)%(!.#.§)'
+
+# cd FILE goes to the file's directory, and cd DIR/ls goes to DIR and lists it.
+cd() {
+    if [ $# -eq 1 ] && [ -f "$1" ]; then
+        case $1 in
+        */*) command cd "${1%/*}/" ;;
+        esac
+    elif [ $# -eq 1 ] && [ "${1##*/}" = ls ]; then
+        case $1 in
+        */*) command cd "${1%/*}/" && ls --color ;;
+        *) ls --color ;;
+        esac
+    else
+        command cd "$@"
+    fi
+}
+
+# field N prints the Nth field of each line.
+field() {
+    [ -n "$1" ] || { echo 'field N' >&2; return 1; }
+    awk "{print \$$1}"
+}

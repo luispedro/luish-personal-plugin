@@ -4,9 +4,35 @@ description = "Luis Pedro's personal luish configuration."
 std.bash-completion = "*"
 std.git-completion = "*"
 
+[options]
+autosuggest = true          # as zsh-autosuggestions
+
+[options.cd]
+auto = true                 # autocd
+
+[options.pushd]
+auto = true                 # auto_pushd
+
+[options.prompt]
+percent = true              # zsh's % sequences in PS1 (set in rc.lsh)
+
+[options.history]
+file = "~/.histfile"        # the same file as zsh, which luish reads and writes in zsh's format
+share = true
+ignore_space = true
+reduce_blanks = true
+save_no_dups = true
+
 [alias]
+ls = "ls --color=auto"
+open = "xdg-open"
+
+[alias.global]
 "..." = "../.."
 "...." = "../../.."
 "....." = "../../../.."
 "......" = "../../../../.."
 "......." = "../../../../../.."
+
+[bindkey]
+"^[?" = "insert-last-word"  # Alt-?, as well as the default Alt-.
