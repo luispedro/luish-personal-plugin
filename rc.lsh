@@ -6,8 +6,9 @@ CDPATH=:$HOME:$HOME/Sync/work:$HOME/work
 # Without /, so that Ctrl-W deletes one component of a path.
 WORDCHARS='*?_-.[]~=&;!#%^(){}<>'
 
-# user@host:/path/ (easy to copy with the mouse), then a bold ! if the last command failed, and § (# for root).
-PS1='%n@%m:%/ %(?. .%B!%b)%(!.#.§)'
+# user@host : /path/ (easy to copy with the mouse), show the exit status of the last command if it was non-zero, and use a different prompt character for root
+PS1='%[user]@%[hostname] : %[fg:blue]%[dir]%[fg_off] %([status]..%[fg:red][%[status]]%[fg_off] )%([root].#.§)'
+
 
 # cd FILE goes to the file's directory, and cd DIR/ls goes to DIR and lists it.
 cd() {
