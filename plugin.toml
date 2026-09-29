@@ -2,7 +2,7 @@ description = "Luis Pedro's personal luish configuration."
 
 [dependencies]
 std.bash-completion = "*"
-std.git-completion = "*"
+std.completion = "*"
 
 [options]
 autosuggest = true          # as zsh-autosuggestions
