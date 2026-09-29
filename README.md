@@ -8,7 +8,8 @@ machine gets the same setup from one line of `config.toml`.
 Most of it comes from my zsh configuration.
 
 - **Plugins** (as dependencies in `plugin.toml`, loaded first): `std.bash-completion` (completion from
-  bash-completion for commands without a completer of their own) and `std.git-completion`.
+  bash-completion for commands without a completer of their own) and `std.completion` (the full set of luish's
+  standard completers, git's included).
 - **Options** (`plugin.toml`): `autosuggest` (as zsh-autosuggestions), `cd.auto` (`autocd`), `pushd.auto`
   (`auto_pushd`), `prompt.percent`, and for the history: `share`, `ignore_space`, `reduce_blanks` and `save_no_dups`,
   in `~/.histfile`, the file zsh uses (luish reads and writes zsh's format, so the two share it).
@@ -19,7 +20,8 @@ Most of it comes from my zsh configuration.
 - **`rc.lsh`**, for what `plugin.toml` can't hold:
   - `CDPATH`: the current directory, `~`, `~/Sync/work` and `~/work`;
   - `WORDCHARS` without `/`, so that Ctrl-W deletes one component of a path;
-  - the prompt, `user@host:/path/ §`, with a bold `!` if the last command failed;
+  - the prompt, `user@host : /path/ §` (`#` for root), with the directory in blue and, if the last command failed,
+    its exit status in red, as in `user@host : /path/ [1] §`;
   - `cd FILE`, which goes to the file's directory, and `cd DIR/ls`, which goes to `DIR` and lists it;
   - `field N`, which prints the `N`th field of each line.
 
@@ -61,7 +63,7 @@ A `path` source is used where it is, so changes take effect in the next shell, w
 ```text
 luish-personal-plugin/
 ├── plugin.toml   # dependencies, and options, aliases and key bindings
-└── rc.lsh        # what plugin.toml can't hold (variables); interactive shells only
+└── rc.lsh        # what plugin.toml can't hold (variables, functions); interactive shells only
 ```
 
 Options go in `[options]` and key bindings in `[bindkey]` in `plugin.toml` (see luish's `docs/plugins.md`). Prefer
