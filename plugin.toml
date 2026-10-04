@@ -8,13 +8,17 @@ std.completion = "*"
 autosuggest = true          # as zsh-autosuggestions
 
 [options.cd]
-auto = true                 # autocd
+auto = true                 # type a path and hit enter to cd into it
 
 [options.pushd]
-auto = true                 # auto_pushd
+auto = true                 # pushd on every cd
 
 [options.prompt]
 percent = true              # zsh's % sequences in PS1 (set in rc.lsh)
+
+[options.glob]
+star = true                 # globstar (**) support
+bare_qualifiers = true      # allow bare qualifiers in globs, e.g. `*(.)` for files only
 
 [options.history]
 file = "~/.histfile"        # the same file as zsh, which luish reads and writes in zsh's format
