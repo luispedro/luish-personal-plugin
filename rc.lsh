@@ -7,7 +7,7 @@ CDPATH=:$HOME:$HOME/Sync/work:$HOME/work
 WORDCHARS='*?_-.[]~=&;!#%^(){}<>'
 
 # user@host : /path/ (easy to copy with the mouse), show the exit status of the last command if it was non-zero, and use a different prompt character for root
-PS1='%[user]@%[hostname] : %[fg:blue]%[dir]%[fg_off] %([status]..%[fg:red][%[status]]%[fg_off] )%([root].#.§)'
+PS1='%[user]@%[hostname] : %[style:keyword]%[dir]%[style_off] %([status]..%[fg:red][!]%[fg_off] )%([root].#.§)'
 
 
 # cd FILE goes to the file's directory, and cd DIR/ls goes to DIR and lists it.
