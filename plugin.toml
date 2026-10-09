@@ -1,6 +1,11 @@
 description = "Luis Pedro's personal luish configuration."
 
+[available]
+"luish-extra" = { gh = "luispedro/luish-extra" }
+
 [dependencies]
+"luish-extra/completion/all" = { }
+"luish-extra/themes" = { }
 std.bash-completion = "*"
 std.completion = "*"
 
@@ -38,5 +43,3 @@ open = "xdg-open"
 "......" = "../../../../.."
 "......." = "../../../../../.."
 
-[bindkey]
-"^[?" = "insert-last-word"  # Alt-?, as well as the default Alt-.
