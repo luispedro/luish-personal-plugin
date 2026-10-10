@@ -11,6 +11,8 @@ std.completion = "*"
 
 [options]
 autosuggest = true          # as zsh-autosuggestions
+history.expand = true       # as zsh's history expansion
+expand.braces = true        # as zsh's brace expansion
 
 [options.cd]
 auto = true                 # type a path and hit enter to cd into it
