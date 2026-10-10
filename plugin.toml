@@ -11,7 +11,6 @@ std.completion = "*"
 
 [options]
 autosuggest = true          # as zsh-autosuggestions
-history.expand = true       # as zsh's history expansion
 expand.braces = true        # as zsh's brace expansion
 
 [options.cd]
@@ -28,6 +27,7 @@ star = true                 # globstar (**) support
 bare_qualifiers = true      # allow bare qualifiers in globs, e.g. `*(.)` for files only
 
 [options.history]
+expand = true               # as zsh's history expansion (!!, !$, ...)
 file = "~/.histfile"        # the same file as zsh, which luish reads and writes in zsh's format
 share = true
 ignore_space = true
