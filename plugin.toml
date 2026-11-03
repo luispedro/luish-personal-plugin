@@ -12,6 +12,7 @@ std.completion = "*"
 [options]
 autosuggest = true          # as zsh-autosuggestions
 expand.braces = true        # as zsh's brace expansion
+vars.trace_after_startup = true  # trace all variables after startup (for debugging)
 
 [options.cd]
 auto = true                 # type a path and hit enter to cd into it
