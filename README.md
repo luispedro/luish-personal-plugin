@@ -8,19 +8,24 @@ machine gets the same setup from one line of `config.toml`.
 Most of it comes from my zsh configuration.
 
 - **Plugins** (as dependencies in `plugin.toml`, loaded first): `std.bash-completion` (completion from
-  bash-completion for commands without a completer of their own) and `std.completion` (the full set of luish's
-  standard completers, git's included).
-- **Options** (`plugin.toml`): `autosuggest` (as zsh-autosuggestions), `cd.auto` (`autocd`), `pushd.auto`
-  (`auto_pushd`), `prompt.percent`, and for the history: `share`, `ignore_space`, `reduce_blanks` and `save_no_dups`,
-  in `~/.histfile`, the file zsh uses (luish reads and writes zsh's format, so the two share it).
+  bash-completion for commands without a completer of their own), `std.completion` (the full set of luish's
+  standard completers, git's included), and from [luish-extra](https://github.com/luispedro/luish-extra) (made
+  available in `[available]`, so that its other plugins, such as `luish-extra/conda`, can be enabled on any
+  machine): `completion/all` (all its extra completers) and `themes` (its colour schemes).
+- **Options** (`plugin.toml`): `autosuggest` (as zsh-autosuggestions), `expand.braces` (brace expansion),
+  `cd.auto` (`autocd`), `pushd.auto` (`auto_pushd`), `prompt.percent`, `glob.star` (`**`) and
+  `glob.bare_qualifiers` (`*(.)`), `vars.trace_after_startup` (records where each variable is set, from the first
+  prompt on, for debugging), and for the history: `expand` (`!!`, `!$`, …), `share`, `ignore_space`,
+  `reduce_blanks` and `save_no_dups`, in `~/.histfile`, the file zsh uses (luish reads and writes zsh's format, so
+  the two share it).
 - **Aliases** (`plugin.toml`): `ls --color=auto`, `open` for `xdg-open`, and the global aliases `...`, `....`, …
   up to seven dots, for `../..`, `../../..`, and so on (so `...` alone goes up two directories, with `cd.auto`).
-- **Key bindings** (`plugin.toml`): Alt-? for `insert-last-word`. Up and Down already search the history for what
-  was typed, as in zsh.
+  Up and Down already search the history for what was typed, as in zsh, so there are no key bindings.
 - **`rc.lsh`**, for what `plugin.toml` can't hold:
   - `CDPATH`: the current directory, `~`, `~/Sync/work` and `~/work`;
   - `WORDCHARS` without `/`, so that Ctrl-W deletes one component of a path;
-  - the prompt, `user@host : /path/ §` (`#` for root), with the directory in blue and, if the last command failed,
+  - the prompt, `user@host : /path/ §` (`#` for root), with the directory in the colour scheme's `keyword` style
+    and, if the last command failed,
     its exit status in red, as in `user@host : /path/ [1] §`;
   - `cd FILE`, which goes to the file's directory, and `cd DIR/ls`, which goes to `DIR` and lists it;
   - `field N`, which prints the `N`th field of each line.
@@ -30,8 +35,8 @@ Machine-specific setup (conda, nvm, cargo, pixi, `PATH`) is not here: it stays i
 
 ## Installing
 
-This needs a luish with `[alias]` support in `plugin.toml` (commit 90b3619 or later), plus `bash` and
-bash-completion for `std.bash-completion`.
+This needs luish 0.8 or newer (luish-extra's plugins require it), plus `bash` and bash-completion for
+`std.bash-completion`.
 
 Add the plugin to `~/.config/luish/config.toml`:
 
@@ -40,7 +45,7 @@ Add the plugin to `~/.config/luish/config.toml`:
 personal = { gh = "luispedro/luish-personal-plugin" }
 ```
 
-then fetch it (and the `std` plugins it depends on) in an interactive luish:
+then fetch it (and the `std` and luish-extra plugins it depends on) in an interactive luish:
 
 ```sh
 plugin sync
