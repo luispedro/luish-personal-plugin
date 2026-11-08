@@ -31,3 +31,10 @@ field() {
     [ -n "$1" ] || { echo 'field N' >&2; return 1; }
     awk "{print \$$1}"
 }
+
+# rename FILE asks for the new name, starting from the current one (to make small changes to a filename).
+rename() {
+    [ $# -eq 1 ] || { echo 'rename FILE' >&2; return 1; }
+    local newname="$1"
+    vared -p 'rename to: ' newname && command mv -i -- "$1" "$newname"
+}
