@@ -12,6 +12,7 @@ std.completion = "*"
 [options]
 autosuggest = true          # as zsh-autosuggestions
 expand.braces = true        # as zsh's brace expansion
+highlight.paths = true      # underline the words that name existing files as you type
 vars.trace_after_startup = true  # trace all variables after startup (for debugging)
 
 [options.cd]
@@ -19,6 +20,8 @@ auto = true                 # type a path and hit enter to cd into it
 
 [options.pushd]
 auto = true                 # pushd on every cd
+ignore_dups = true          # but don't push a directory that's already on the stack
+silent = true               # and don't print the stack after each cd
 
 [options.prompt]
 percent = true              # zsh's % sequences in PS1 (set in rc.lsh)
@@ -29,7 +32,9 @@ bare_qualifiers = true      # allow bare qualifiers in globs, e.g. `*(.)` for fi
 
 [options.history]
 expand = true               # as zsh's history expansion (!!, !$, ...)
-file = "~/.histfile"        # the same file as zsh, which luish reads and writes in zsh's format
+file = "~/.histfile"        # in zsh's format (zsh itself now uses ~/.zsh_history)
+size = 10000                # as zsh's HISTSIZE (luish's default is 1000)
+save_size = 10000           # as zsh's SAVEHIST
 share = true
 ignore_space = true
 reduce_blanks = true

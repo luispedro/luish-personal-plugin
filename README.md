@@ -13,11 +13,12 @@ Most of it comes from my zsh configuration.
   available in `[available]`, so that its other plugins, such as `luish-extra/conda`, can be enabled on any
   machine): `completion/all` (all its extra completers) and `themes` (its colour schemes).
 - **Options** (`plugin.toml`): `autosuggest` (as zsh-autosuggestions), `expand.braces` (brace expansion),
-  `cd.auto` (`autocd`), `pushd.auto` (`auto_pushd`), `prompt.percent`, `glob.star` (`**`) and
+  `highlight.paths` (underlines words that name existing files), `cd.auto` (`autocd`), `pushd.auto`
+  (`auto_pushd`) with `pushd.ignore_dups` and `pushd.silent`, `prompt.percent`, `glob.star` (`**`) and
   `glob.bare_qualifiers` (`*(.)`), `vars.trace_after_startup` (records where each variable is set, from the first
   prompt on, for debugging), and for the history: `expand` (`!!`, `!$`, …), `share`, `ignore_space`,
-  `reduce_blanks` and `save_no_dups`, in `~/.histfile`, the file zsh uses (luish reads and writes zsh's format, so
-  the two share it).
+  `reduce_blanks` and `save_no_dups`, with 10,000 entries (as zsh's `HISTSIZE` and `SAVEHIST`; luish keeps 1,000
+  by default), in `~/.histfile`, in zsh's format.
 - **Aliases** (`plugin.toml`): `ls --color=auto`, `open` for `xdg-open`, and the global aliases `...`, `....`, …
   up to seven dots, for `../..`, `../../..`, and so on (so `...` alone goes up two directories, with `cd.auto`).
   Up and Down already search the history for what was typed, as in zsh, so there are no key bindings.
