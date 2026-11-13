@@ -27,8 +27,10 @@ Most of it comes from my zsh configuration.
   - the prompt, `user@host : /path/ §` (`#` for root), with the directory in the colour scheme's `keyword` style
     and, if the last command failed,
     its exit status in red, as in `user@host : /path/ [1] §`;
-  - `cd FILE`, which goes to the file's directory, and `cd DIR/ls`, which goes to `DIR` and lists it;
-  - `field N`, which prints the `N`th field of each line.
+  - `cd DIR/FILE`, which goes to the file's directory, and `cd DIR/ls`, which goes to `DIR` and lists it (a real
+    directory of that name always wins);
+  - `field N [FILE...]`, which prints the `N`th field of each line (`field NF`, the last);
+  - `rename FILE`, which puts the file's name on the line to edit, then moves the file to the edited name.
 
 Machine-specific setup (conda, nvm, cargo, pixi, `PATH`) is not here: it stays in each machine's
 `~/.config/luish/rc.d/`, which runs after this plugin and can override what it sets.
@@ -67,7 +69,7 @@ A `path` source is used where it is, so changes take effect in the next shell, w
 
 ```text
 luish-personal-plugin/
-├── plugin.toml   # dependencies, and options, aliases and key bindings
+├── plugin.toml   # dependencies, options and aliases
 └── rc.lsh        # what plugin.toml can't hold (variables, functions); interactive shells only
 ```
 

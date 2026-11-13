@@ -10,31 +10,33 @@ WORDCHARS='*?_-.[]~=&;!#%^(){}<>'
 PS1='%[user]@%[hostname] : %[style:keyword]%[dir]%[style_off] %([status]..%[fg:red][%[status]]%[fg_off] )%([root].#.§)'
 
 
-# cd FILE goes to the file's directory, and cd DIR/ls goes to DIR and lists it.
+# cd DIR/FILE goes to DIR, and cd DIR/ls goes to DIR and lists it (cd ls lists the current directory). A real
+# directory always wins, and a bare name that isn't one goes to the builtin, so that CDPATH is searched.
 cd() {
-    if [ $# -eq 1 ] && [ -f "$1" ]; then
+    if [ $# -eq 1 ] && [ ! -d "$1" ]; then
         case $1 in
-        */*) command cd "${1%/*}/" ;;
+        */ls) command cd "${1%/*}/" && command ls --color=auto; return ;;
+        ls) command ls --color=auto; return ;;
+        */*) [ -f "$1" ] && { command cd "${1%/*}/"; return; } ;;
         esac
-    elif [ $# -eq 1 ] && [ "${1##*/}" = ls ]; then
-        case $1 in
-        */*) command cd "${1%/*}/" && ls --color ;;
-        *) ls --color ;;
-        esac
-    else
-        command cd "$@"
     fi
+    command cd "$@"
 }
 
-# field N prints the Nth field of each line.
+# field N [FILE...] prints the Nth field of each line (field NF prints the last).
 field() {
-    [ -n "$1" ] || { echo 'field N' >&2; return 1; }
-    awk "{print \$$1}"
+    [ -n "$1" ] || { echo 'field N [FILE...]' >&2; return 1; }
+    local n="$1"
+    shift
+    awk "{print \$$n}" "$@"
 }
 
 # rename FILE asks for the new name, starting from the current one (to make small changes to a filename).
 rename() {
     [ $# -eq 1 ] || { echo 'rename FILE' >&2; return 1; }
+    [ -e "$1" ] || [ -L "$1" ] || { echo "rename: $1: no such file" >&2; return 1; }
     local newname="$1"
-    vared -p 'rename to: ' newname && command mv -i -- "$1" "$newname"
+    vared -p 'rename to: ' newname || return
+    [ -n "$newname" ] && [ "$newname" != "$1" ] || return 0
+    command mv -i -- "$1" "$newname"
 }
